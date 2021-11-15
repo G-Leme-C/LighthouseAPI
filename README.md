@@ -2,7 +2,7 @@
 
 ## The project
 
-    Lighthouse is a platform made for users to report people in need of help to the government institutions and non-profit organizations.
+Lighthouse is a platform made for users to report people in need of help to the government institutions and non-profit organizations.
 
 ## Motivation
 
