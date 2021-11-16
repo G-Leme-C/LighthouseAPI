@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LighthouseAPI.MapProfiles;
 using LighthouseData.ConfigurationModel;
 using LighthouseData.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
 
 namespace LighthouseAPI
 {
@@ -47,6 +49,8 @@ namespace LighthouseAPI
             );
 
             services.AddScoped<HelpReportRepository>();
+
+            services.AddAutoMapper(typeof(LighthouseHelpReportProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

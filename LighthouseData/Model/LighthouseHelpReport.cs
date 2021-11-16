@@ -23,9 +23,7 @@ namespace LighthouseData.Model
 
         public bool IsThereNeedForMedicalCare { get; set; }
         public string MedicalCareNeedsDescription { get; set; }
-
         public YesNoAnswerType IsThereNeedForFood { get; set; }
-
         public UrgencyLevel UrgencyLevel { get; set; }
     }
 
