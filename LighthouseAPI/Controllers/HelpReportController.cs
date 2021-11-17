@@ -13,7 +13,6 @@ namespace LighthouseAPI.Controllers
     [Route("[controller]")]
     public class HelpReportController : ControllerBase
     {
-
         private readonly HelpReportRepository _reportRepository;
         private readonly IMapper _mapper;
 
@@ -22,18 +21,17 @@ namespace LighthouseAPI.Controllers
         {
             this._mapper = mapper;
             this._reportRepository = reportRepository;
-
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateHelpReport(CreateHelpReportInputModel createdHelpReport)
+        public async Task<IActionResult> CreateHelpReport(CreateHelpReportInputModel helpReportCreationModel)
         {
-            var helpReport = _mapper.Map<CreateHelpReportInputModel, LighthouseHelpReport>(createdHelpReport);
+            var helpReport = _mapper.Map<CreateHelpReportInputModel, LighthouseHelpReport>(helpReportCreationModel);
 
-            await _reportRepository.Create(helpReport);
+            var createdHelpReport = await _reportRepository.Create(helpReport);
 
-            return Ok();
+            return CreatedAtAction(nameof(GetReportById), new { id = createdHelpReport.ReportId }, createdHelpReport);
         }
 
         [HttpGet]
@@ -41,6 +39,20 @@ namespace LighthouseAPI.Controllers
             var reports = await _reportRepository.GetAll();
 
             return Ok(reports);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetReportById(string id) {
+            if(string.IsNullOrEmpty(id)) 
+                return BadRequest();
+
+            var helpReportById = await _reportRepository.Get(id);
+
+            if(helpReportById == null) {
+                return NotFound();
+            }
+
+            return Ok(helpReportById);
         }
     }
 }
