@@ -16,6 +16,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
+using LighthouseDomain.Validators;
+using LighthouseData.Model;
+using FluentValidation;
 
 namespace LighthouseAPI
 {
@@ -51,6 +54,8 @@ namespace LighthouseAPI
             services.AddScoped<HelpReportRepository>();
 
             services.AddAutoMapper(typeof(LighthouseHelpReportProfile));
+
+            services.AddScoped<IValidator<LighthouseHelpReport>, HelpReportValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
